@@ -1,32 +1,36 @@
 import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import typeDefs from "./typeDefs.js";
 import resolvers from "./resolvers.js";
+import connectDB from "./db/connect.js";
 
 dotenv.config();
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // Connect to MongoDB
+    await connectDB();
 
-    console.log("✅ Connected to MongoDB");
-
+    // Create Apollo Server
     const server = new ApolloServer({
       typeDefs,
       resolvers,
       plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+      formatError: (err) => {
+        return {
+          message: err.message,
+          code: err.extensions?.code || "INTERNAL_SERVER_ERROR",
+          details: err.extensions?.exception?.details || null,
+        };
+      },
     });
 
     const { url } = await server.listen({ port: process.env.PORT || 4000 });
-    console.log(`🚀 Server ready at ${url}`);
+    console.log(`\n🚀 Server ready at ${url}`);
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
+    console.error("❌ Apollo Server Error:", error);
   }
 };
 

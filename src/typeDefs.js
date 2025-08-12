@@ -5,12 +5,11 @@ const typeDefs = gql`
   type User {
     id: ID!
     name: String!
-    email: String
+    email: String!
     age: Int
     gender: String
     city: String
     country: String
-    joinedAt: String
     isActive: Boolean
     quotes: [Quote]
   }
@@ -32,12 +31,12 @@ const typeDefs = gql`
   type Mutation {
     addUser(
       name: String!
-      email: String
+      email: String!
+      password: String!
       age: Int
       gender: String
       city: String
       country: String
-      joinedAt: String
       isActive: Boolean
     ): User
 
@@ -49,7 +48,6 @@ const typeDefs = gql`
       gender: String
       city: String
       country: String
-      joinedAt: String
       isActive: Boolean
     ): User
 
