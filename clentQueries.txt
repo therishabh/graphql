@@ -31,3 +31,49 @@ query getAllUsersAndAllQuotes {
     }
   }
 }
+
+------------------------------------------
+
+mutation {
+  addUser(
+    name: "Ram"
+    email: "ram@gmail.com"
+    age: 23
+    gender: "male"
+    city: "Lucknow"
+    country: "India"
+    isActive: false
+  ) {
+    id
+    name,
+    joinedAt,
+    isActive
+  }
+}
+
+------------------------------------------
+
+mutation {
+  updateUser(
+    id:"1"
+    name: "Rohann"
+    email: "rohann@gmail.com"
+    age: 23
+    gender: "male"
+    city: "Lucknow"
+    country: "India"
+    isActive: false
+  ) {
+    id
+    name,
+    joinedAt,
+    isActive
+  }
+}
+
+
+------------------------------------------
+
+mutation {
+  deleteUser(id:1)
+}

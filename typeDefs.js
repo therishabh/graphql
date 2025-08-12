@@ -28,6 +28,33 @@ const typeDefs = gql`
     user(id: ID!): User
     quote(id: ID!): Quote
   }
+
+  type Mutation {
+    addUser(
+      name: String!
+      email: String
+      age: Int
+      gender: String
+      city: String
+      country: String
+      joinedAt: String
+      isActive: Boolean
+    ): User
+
+    updateUser(
+      id: ID!
+      name: String!
+      email: String!
+      age: Int
+      gender: String
+      city: String
+      country: String
+      joinedAt: String
+      isActive: Boolean
+    ): User
+
+    deleteUser(id: ID!): String
+  }
 `;
 
 export default typeDefs;
