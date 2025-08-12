@@ -1,0 +1,33 @@
+query getUserById($id:ID!) {
+  userInfo: user(id: $id) {
+    name
+    email
+    quotes {
+      text
+    }
+  }
+}
+
+
+------------------------------------------
+
+
+# Write your query or mutation here
+query getAllUsersAndAllQuotes {
+  userList: users{
+    email
+    name
+    quoteList :quotes {
+      id
+      text
+      
+    }
+  }
+  quoteList:quotes{
+    id
+    text
+    user{
+      email_address:email
+    }
+  }
+}
