@@ -1,5 +1,6 @@
 import { users, quotes } from "./fakedb.js";
 import { v4 as uuidv4 } from "uuid";
+import User from "./models/User.js";
 
 const resolvers = {
   Query: {
@@ -20,24 +21,9 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: (
-      _,
-      { name, email, age, gender, city, country, joinedAt, isActive }
-    ) => {
-      const newEntry = {
-        id: uuidv4(),
-        name,
-        email,
-        age,
-        gender,
-        city,
-        country,
-        joinedAt: joinedAt || new Date().toISOString().split("T")[0],
-        isActive: isActive ?? true,
-      };
-
-      users.push(newEntry);
-      return newEntry;
+    addUser: async (_, args) => {
+      const user = new User(args);
+      return await user.save();
     },
 
     updateUser: (_, { id, ...fields }) => {
