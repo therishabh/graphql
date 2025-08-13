@@ -2,9 +2,9 @@ import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import dotenv from "dotenv";
 
-import typeDefs from "./typeDefs.js";
-import resolvers from "./resolvers.js";
+import { typeDefs, resolvers } from "./schema.js";
 import connectDB from "./db/connect.js";
+import { authMiddleware } from "./authMiddleware.js";
 
 dotenv.config();
 
@@ -18,6 +18,7 @@ const startServer = async () => {
       typeDefs,
       resolvers,
       plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+      context: authMiddleware,
       formatError: (err) => {
         return {
           message: err.message,

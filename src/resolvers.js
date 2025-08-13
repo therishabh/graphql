@@ -1,6 +1,6 @@
 import { users, quotes } from "../fakedb.js";
 // import { v4 as uuidv4 } from "uuid";
-import User from "./models/User.js";
+import User from "./models/user.model.js";
 
 const resolvers = {
   Query: {

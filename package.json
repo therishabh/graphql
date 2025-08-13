@@ -17,6 +17,8 @@
     "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.1",
     "graphql": "^15.7.2",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.17.1",
     "uuid": "^11.1.0"
   }
